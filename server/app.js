@@ -66,9 +66,31 @@ app.use("/api/food", foodRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/payment", paymentRoutes);
 
+// Root Route - Health Check
+app.get("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Hotel Management System Backend API is running",
+        version: "1.0.0"
+    });
+});
 
+// 404 Handler
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: "Route not found"
+    });
+});
 
+// Global Error Handler
+app.use((err, req, res, next) => {
+    console.error("Global Error Caught:", err);
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || "Internal Server Error",
+        error: err.toString()
+    });
+});
 
-
-
-export default app;
+export default app;
