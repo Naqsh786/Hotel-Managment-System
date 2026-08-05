@@ -70,18 +70,11 @@ cd Hotel-Managment-System
 cd server
 npm install
 ```
-Create a `.env` file in the `server` directory and add the following variables:
-```env
-PORT=7000
-DATABASE=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-STRIPE_SECRET_KEY=your_stripe_secret_key
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_email_app_password
+Create a `.env` file in the `server` directory by copying the `.env.example` file:
+```bash
+cp .env.example .env
 ```
+Fill in the required variables in the newly created `.env` file.
 Start the backend server:
 ```bash
 npm start
@@ -93,9 +86,9 @@ Open a new terminal and navigate to the client folder:
 cd client
 npm install
 ```
-Create a `.env` file in the `client` directory:
-```env
-VITE_API_URL=http://localhost:7000
+Create a `.env` file in the `client` directory by copying the `.env.example` file:
+```bash
+cp .env.example .env
 ```
 Start the Vite development server:
 ```bash
