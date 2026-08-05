@@ -61,8 +61,8 @@ Follow these instructions to get the project up and running on your local machin
 
 ### 1. Clone the repository
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/Naqsh786/Hotel-Managment-System.git
+cd Hotel-Managment-System
 ```
 
 ### 2. Backend Setup
