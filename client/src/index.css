@@ -79,7 +79,7 @@ body {
 
 .top-bar .container-sona {
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
 }
 
@@ -347,7 +347,7 @@ button, input, textarea, select {
 
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 34px;
 }
 
 .nav-links a {
