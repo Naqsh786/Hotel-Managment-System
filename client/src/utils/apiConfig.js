@@ -15,7 +15,7 @@ const getApiBaseUrl = () => {
 
 export const API_BASE_URL = getApiBaseUrl();
 
-// Socket.io URL - production mein backend URL, local mein localhost:7000
+// Socket.io URL - production mein backend URL, local mein 127.0.0.1:7000
 export const SOCKET_URL = import.meta.env.VITE_API_URL 
     ? import.meta.env.VITE_API_URL.replace(/\/$/, "")
-    : `http://${window.location.hostname}:7000`;
+    : `http://127.0.0.1:7000`;

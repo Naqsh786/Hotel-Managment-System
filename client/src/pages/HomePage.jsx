@@ -8,6 +8,7 @@ import {
 import { useForm } from "react-hook-form";
 import CustomDropdown from "../components/CustomDropdown";
 import axios from "axios";
+import { API_BASE_URL } from "../utils/apiConfig";
 
 const HomePage = () => {
    const navigate = useNavigate();
@@ -33,7 +34,7 @@ const HomePage = () => {
    useEffect(() => {
       const fetchSettings = async () => {
          try {
-            const { data } = await axios.get("http://localhost:7000/api/admin/settings/home");
+            const { data } = await axios.get(`${API_BASE_URL}/api/admin/settings/home`);
             // Backend returns { status: true, data: settings }
             const settings = data?.data;
             if (settings && settings.visibleCategories) {
