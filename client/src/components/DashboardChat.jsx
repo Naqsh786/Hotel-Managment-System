@@ -27,7 +27,7 @@ const DashboardChat = () => {
         if (selectedGuest) {
             dispatch(fetchChatHistory(selectedGuest._id));
             // Mark as read
-            const token = sessionStorage.getItem("token");
+            const token = localStorage.getItem("token");
             axios.post("/api/chat/mark-read", { roleOrUserId: selectedGuest._id }, {
                 headers: { Authorization: `Bearer ${token}` }
             }).then(() => dispatch(fetchActiveChats()));

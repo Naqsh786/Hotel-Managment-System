@@ -97,7 +97,7 @@ const HomePage = () => {
                         </p>
                         <button
                            onClick={() => {
-                              const token = sessionStorage.getItem("token");
+                              const token = localStorage.getItem("token");
                               if (token) navigate('/rooms');
                               else navigate('/login');
                            }}

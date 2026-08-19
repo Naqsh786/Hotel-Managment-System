@@ -20,7 +20,7 @@ export const verifyLoginOTP = createAsyncThunk(
   async (otpData, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/api/auth/verify-login-otp", otpData);
-      sessionStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message || "OTP verification failed");
@@ -59,14 +59,14 @@ export const getProfile = createAsyncThunk(
   "auth/getProfile",
   async (_, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       if (!token) return rejectWithValue("No token found");
       const { data } = await axios.get("/api/auth/profile", {
         headers: { Authorization: `Bearer ${token}` }
       });
       return data.data;
     } catch (error) {
-      sessionStorage.removeItem("token");
+      localStorage.removeItem("token");
       return rejectWithValue(error.response?.data?.message || error.message || "Session expired");
     }
   }
@@ -77,7 +77,7 @@ export const updateUserProfile = createAsyncThunk(
   "auth/updateUserProfile",
   async (userData, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.patch("/api/auth/profile", userData, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -93,7 +93,7 @@ export const updatePassword = createAsyncThunk(
   "auth/updatePassword",
   async (passwordData, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.patch("/api/auth/update-password", passwordData, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -110,8 +110,8 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    token: sessionStorage.getItem("token") || null,
-    loading: !!sessionStorage.getItem("token"),
+    token: localStorage.getItem("token") || null,
+    loading: !!localStorage.getItem("token"),
     error: null,
     success: false,
     requireOtp: false,
@@ -122,7 +122,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.requireOtp = false;
-      sessionStorage.removeItem("token");
+      localStorage.removeItem("token");
     },
     clearError: (state) => {
       state.error = null;
@@ -146,7 +146,7 @@ const authSlice = createSlice({
         } else {
           state.user = payload.data;
           state.token = payload.token;
-          sessionStorage.setItem("token", payload.token);
+          localStorage.setItem("token", payload.token);
           state.success = true;
         }
       })

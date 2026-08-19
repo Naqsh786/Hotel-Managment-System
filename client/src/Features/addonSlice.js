@@ -19,7 +19,7 @@ export const addAddon = createAsyncThunk(
   "addons/addAddon",
   async (addonData, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.post("/api/admin/addons", addonData, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -35,7 +35,7 @@ export const updateAddon = createAsyncThunk(
   "addons/updateAddon",
   async ({ id, addonData }, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.put(`/api/admin/addons/${id}`, addonData, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -51,7 +51,7 @@ export const deleteAddon = createAsyncThunk(
   "addons/deleteAddon",
   async (id, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       await axios.delete(`/api/admin/addons/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });

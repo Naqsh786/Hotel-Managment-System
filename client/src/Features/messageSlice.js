@@ -6,7 +6,7 @@ export const sendMessage = createAsyncThunk(
   "messages/sendMessage",
   async (messageData, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.post("/api/messages", messageData, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -22,7 +22,7 @@ export const fetchAdminMessages = createAsyncThunk(
   "messages/fetchAdminMessages",
   async ({ page, search }, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.get(
         `/api/messages/admin/list?page=${page}&search=${search}`,
         { headers: { Authorization: `Bearer ${token}` } }
@@ -39,7 +39,7 @@ export const deleteMessage = createAsyncThunk(
   "messages/deleteMessage",
   async (id, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       await axios.delete(`/api/messages/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });

@@ -5,7 +5,7 @@ export const fetchChatHistory = createAsyncThunk(
   "chat/fetchHistory",
   async (roleOrUserId, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.get(`/api/chat/history/${roleOrUserId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -20,7 +20,7 @@ export const fetchActiveChats = createAsyncThunk(
   "chat/fetchActive",
   async (_, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.get("/api/chat/active", {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -35,7 +35,7 @@ export const sendChatMessage = createAsyncThunk(
   "chat/sendMessage",
   async (messageData, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.post("/api/chat/send", messageData, {
         headers: { Authorization: `Bearer ${token}` }
       });

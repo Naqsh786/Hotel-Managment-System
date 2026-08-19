@@ -19,7 +19,7 @@ export const addFood = createAsyncThunk(
   "foods/addFood",
   async (foodData, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.post("/api/food", foodData, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -37,7 +37,7 @@ export const updateFood = createAsyncThunk(
   "foods/updateFood",
   async ({ id, foodData }, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.put(`/api/food/${id}`, foodData, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -55,7 +55,7 @@ export const deleteFood = createAsyncThunk(
   "foods/deleteFood",
   async (id, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       await axios.delete(`/api/food/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });

@@ -6,7 +6,7 @@ export const fetchAdminRooms = createAsyncThunk(
   "rooms/fetchAdminRooms",
   async ({ page, search, type }, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.get(
         `/api/rooms/admin/list?page=${page}&search=${search}&type=${type}`,
         { headers: { Authorization: `Bearer ${token}` } }
@@ -49,7 +49,7 @@ export const addRoom = createAsyncThunk(
   "rooms/addRoom",
   async (formData, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.post("/api/rooms", formData, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -67,7 +67,7 @@ export const updateRoom = createAsyncThunk(
   "rooms/updateRoom",
   async ({ id, formData }, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.put(`/api/rooms/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -86,7 +86,7 @@ export const deleteRoom = createAsyncThunk(
   "rooms/deleteRoom",
   async (id, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       await axios.delete(`/api/rooms/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });

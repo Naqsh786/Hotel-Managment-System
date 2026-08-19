@@ -67,7 +67,7 @@ const AdminDashboard = () => {
   }, [socket, dispatch]);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
     window.location.href = "/login";
   };
 

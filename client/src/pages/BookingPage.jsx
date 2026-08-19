@@ -142,7 +142,7 @@ const BookingPage = () => {
         bookingId: booking._id
       }, {
         headers: {
-          'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
 

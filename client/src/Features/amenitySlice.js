@@ -17,7 +17,7 @@ export const addAmenity = createAsyncThunk(
   "amenities/addAmenity",
   async (amenityData, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.post("/api/admin/amenities", amenityData, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -32,7 +32,7 @@ export const updateAmenity = createAsyncThunk(
   "amenities/updateAmenity",
   async ({ id, amenityData }, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const { data } = await axios.put(`/api/admin/amenities/${id}`, amenityData, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -47,7 +47,7 @@ export const deleteAmenity = createAsyncThunk(
   "amenities/deleteAmenity",
   async (id, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       await axios.delete(`/api/admin/amenities/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });

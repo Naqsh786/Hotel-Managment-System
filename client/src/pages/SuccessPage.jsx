@@ -18,7 +18,7 @@ const SuccessPage = () => {
         if (bookingId && sessionId) {
             axios.post('/api/payment/confirm-booking', { bookingId }, {
                 headers: {
-                    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
             .then(() => {
