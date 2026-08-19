@@ -170,7 +170,7 @@ const HomePage = () => {
                </div>
             </div>
          </section>
-
+         
          {/* Amenities Section */}
          <section className="section-padding" style={{ background: 'var(--sona-bg)' }}>
             <div className="container-sona">
