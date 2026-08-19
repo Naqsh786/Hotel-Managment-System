@@ -28,7 +28,12 @@ export const createCheckoutSession = async (req, res) => {
             });
         }
 
-        const clientUrl = process.env.CLIENT_URL || req.headers.origin || 'http://localhost:5173';
+        // Origin se exact domain pata chalega, agar nahi mila toh fallback
+        const origin = req.headers.origin || req.headers.referer;
+        // Agar referer se mil raha hai toh last ka slash hata dein
+        const cleanOrigin = origin ? origin.replace(/\/$/, "") : null;
+        
+        const clientUrl = cleanOrigin || process.env.CLIENT_URL || 'http://localhost:5173';
 
         // Create checkout session
         const session = await getStripe().checkout.sessions.create({
