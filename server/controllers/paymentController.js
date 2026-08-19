@@ -22,11 +22,13 @@ export const createCheckoutSession = async (req, res) => {
         const { roomName, price, quantity, bookingId } = req.body;
 
         if (!roomName || !price || !quantity || !bookingId) {
-            return res.status(400).json({ 
-                status: false, 
-                message: "Missing required payment details (roomName, price, quantity, bookingId)" 
+            return res.status(400).json({
+                status: false,
+                message: "Missing required payment details (roomName, price, quantity, bookingId)"
             });
         }
+
+        const clientUrl = process.env.CLIENT_URL || req.headers.origin || 'http://localhost:5173';
 
         // Create checkout session
         const session = await getStripe().checkout.sessions.create({
@@ -49,20 +51,20 @@ export const createCheckoutSession = async (req, res) => {
             metadata: {
                 bookingId: bookingId
             },
-            success_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/success?session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}`,
-            cancel_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/cancel`,
+            success_url: `${clientUrl}/success?session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}`,
+            cancel_url: `${clientUrl}/cancel`,
         });
 
-        res.json({ 
-            status: true, 
+        res.json({
+            status: true,
             id: session.id,
-            url: session.url 
+            url: session.url
         });
     } catch (error) {
         console.error("Stripe Session Error:", error);
-        res.status(500).json({ 
-            status: false, 
-            message: error.message || "Failed to create checkout session" 
+        res.status(500).json({
+            status: false,
+            message: error.message || "Failed to create checkout session"
         });
     }
 };
